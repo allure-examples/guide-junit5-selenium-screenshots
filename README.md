@@ -1,0 +1,1 @@
+# guide-junit5-selenium-screenshots
