@@ -1,0 +1,57 @@
+plugins {
+    id 'java'
+}
+
+wrapper {
+    gradleVersion = '8.7'
+}
+
+repositories {
+    mavenCentral()
+}
+
+group = 'org.allure'
+version = '1.0-SNAPSHOT'
+
+def allureVersion = '2.32.0'
+def aspectJVersion = '1.9.22'
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(23)
+    }
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+    options.compilerArgs.add('-parameters')
+}
+
+configurations {
+    agent {
+        canBeResolved = true
+        canBeConsumed = true
+    }
+}
+
+dependencies {
+    agent "org.aspectj:aspectjweaver:$aspectJVersion"
+
+    testImplementation platform("io.qameta.allure:allure-bom:2.29.1")
+    testImplementation "io.qameta.allure:allure-junit5"
+
+    testImplementation platform("org.junit:junit-bom:5.12.0")
+    testImplementation "org.junit.jupiter:junit-jupiter-api"
+    testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine"
+
+    testImplementation "org.slf4j:slf4j-simple:2.0.12"
+
+    testImplementation "org.seleniumhq.selenium:selenium-java:4.29.0"
+    testImplementation "commons-io:commons-io:2.18.0"
+}
+
+test {
+    ignoreFailures = true
+    useJUnitPlatform()
+    jvmArgs = [ "-javaagent:${configurations.agent.singleFile}" ]
+}
