@@ -18,7 +18,7 @@ def aspectJVersion = '1.9.22'
 
 java {
     toolchain {
-        languageVersion = JavaLanguageVersion.of(23)
+        languageVersion = JavaLanguageVersion.of(21)
     }
 }
 
