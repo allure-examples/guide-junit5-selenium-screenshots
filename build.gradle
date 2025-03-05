@@ -10,7 +10,7 @@ repositories {
     mavenCentral()
 }
 
-group = 'org.allure'
+group = 'org.allurereport.guide'
 version = '1.0-SNAPSHOT'
 
 def allureVersion = '2.32.0'
@@ -47,7 +47,6 @@ dependencies {
     testImplementation "org.slf4j:slf4j-simple:2.0.12"
 
     testImplementation "org.seleniumhq.selenium:selenium-java:4.29.0"
-    testImplementation "commons-io:commons-io:2.18.0"
 }
 
 test {
